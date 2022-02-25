@@ -1,5 +1,5 @@
 import { ResultSetHeader } from 'mysql2';
-import { User } from '../interface/interface';
+import { IUserWithId, User } from '../interface/interface';
 import connection from './connection';
 
 export const createUser = async (user:User):Promise<number | null> => {
@@ -18,14 +18,11 @@ export const createUser = async (user:User):Promise<number | null> => {
 export const findUser = async (name: User['username']) => {
   try {
     const [rows] = await connection.execute(`
-  SELECT username, classe, level, password FROM Trybesmith.Users WHERE username = ?
+  SELECT * FROM Trybesmith.Users WHERE username = ?
   `, [name]);
-    const [user] = rows as User[]; 
+    const [user] = rows as IUserWithId[]; 
     return user;
   } catch (error) {
     console.error(error);  
   }
 };
-findUser('xablau');
-
-// :Promise<User>

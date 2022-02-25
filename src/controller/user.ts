@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as serviceUser from '../service/user';
-import { allValidCreate } from './joiError/create';
+import { allValidCreate } from './joiError/validUser';
 
 const createUser = async (req:Request, res:Response) => {
   allValidCreate(req.body);

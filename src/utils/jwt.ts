@@ -1,4 +1,4 @@
-import Jwt, {} from 'jsonwebtoken';
+import Jwt from 'jsonwebtoken';
 import { User } from '../interface/interface';
 
 const senha = 'minhaSenhaÉ';
@@ -12,8 +12,8 @@ export const login = (payload:User):string => {
     algorithm: 'HS256' });
   return result;
 };
-
+// source: https://stackoverflow.com/questions/68403905/how-to-add-additional-properties-to-jwtpayload-type-from-types-jsonwebtoken
 export const valid = (token:string) => {
-  const result = Jwt.verify(token, senha);
+  const result = Jwt.verify(token, senha); 
   return result;
 };

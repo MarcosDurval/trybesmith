@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as serviceUser from '../service/user';
-import { validNamePassword } from './joiError/create';
+import { validNamePassword } from './joiError/validUser';
 
 const findUser = async (req:Request, res:Response) => {
   validNamePassword(req.body);

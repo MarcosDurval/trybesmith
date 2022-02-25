@@ -30,7 +30,7 @@ afterAll(async () => {
 // Clean database before tests
 beforeAll(async () => { await recreateDatabase(); });
 
-describe.only("1 - Crie um endpoint para o cadastro de pessoas usuárias", () => {
+describe("1 - Crie um endpoint para o cadastro de pessoas usuárias", () => {
   // Close connections and server after tests
   afterAll(async () => {
     await dropDatabase();
@@ -418,7 +418,7 @@ describe("4 - Crie um endpoint para a listagem de produtos", () => {
   });
 });
 
-describe("5 - Crie um endpoint para o cadastro de um pedido", () => {
+describe.only("5 - Crie um endpoint para o cadastro de um pedido", () => {
   let token: string;
 
   beforeEach(async () => {

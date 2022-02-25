@@ -1,9 +1,10 @@
 import { ErrorRequestHandler } from 'express';
 
 enum Listerro {
-  'BadRequest' = 400,
-  'NotFound' = 404,
-  'UnprocessableEntity' = 422,
+  BadRequest = 400,
+  NotFound = 404,
+  UnprocessableEntity = 422,
+  Unauthorized = 401,
 }
 const erros:ErrorRequestHandler = (err, _req, res, next) => {
   const type = Listerro[err.code];
@@ -14,4 +15,3 @@ const erros:ErrorRequestHandler = (err, _req, res, next) => {
   return next(err);
 };
 export default erros;
-// console.log(listErro.notFound);
