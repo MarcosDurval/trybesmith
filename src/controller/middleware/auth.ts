@@ -1,6 +1,6 @@
 import { Response, NextFunction, Request } from 'express';
 import CustomError from '../../error/customErro';
-import { ErrorType, IUser } from '../../interface/interface';
+import { ErrorType, IUserWithId } from '../../interface/interface';
 import { valid } from '../../utils/jwt';
 
 const erroType:ErrorType = { code: 'Unauthorized' };
@@ -12,7 +12,7 @@ const verifyToken = (req:Request, _res:Response, next:NextFunction) => {
     throw new CustomError(erroType);
   }
   try {
-    const user = valid(authorization) as IUser;
+    const user = valid(authorization) as IUserWithId;
     req.user = user;
     return next();
   } catch (error) {

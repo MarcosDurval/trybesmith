@@ -5,8 +5,15 @@ import * as serviceOrder from '../service/order';
 const createOrder = async (req:Request, res:Response) => {
   const { body: { products }, user: { id } } = req;
   validArray(products);
-  const [userId, productIds] = await serviceOrder.default(id || 0, products);
+  const [userId, productIds] = await serviceOrder.default(id, products);
   return res.status(201).json({ order: { userId, products: productIds } });
 }; 
+export const findeOrder = async (req:Request, res:Response) => {
+  const strigId = req.params.id;
+  const id = +strigId;
+  const [userId, trat] = await serviceOrder.findId(id);
+
+  return res.status(200).json({ id, userId, products: trat });
+};
 
 export default createOrder;

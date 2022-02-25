@@ -31,5 +31,5 @@ export interface IUser extends JwtPayload {
   exp:number
 }
 export interface IUserWithId extends User{
-  id?:number
+  id:number
 }

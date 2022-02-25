@@ -4,6 +4,7 @@ import * as controllerOrdes from '../controller/orders';
 import auth from '../controller/middleware/auth';
 import { IUserWithId } from '../interface/interface';
 
+// source: https://serveanswer.com/questions/how-do-i-add-custom-property-to-express-request-in-typescript
 declare module 'express-serve-static-core'{
   interface Request {
     user:IUserWithId
@@ -13,5 +14,5 @@ const orders = Router();
 
 orders.use(auth);
 orders.post('/', controllerOrdes.default);
-
+orders.get('/:id', controllerOrdes.findeOrder);
 export default orders;
