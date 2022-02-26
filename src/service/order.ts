@@ -1,5 +1,5 @@
 import CustomError from '../error/customErro';
-import { ErrorType } from '../interface/interface';
+import { ErrorType } from '../interface';
 import * as modelOrder from '../models/ordes';
 
 const erroType:ErrorType = { code: 'NotFound' };
@@ -22,8 +22,7 @@ export const findId = async (id:number) => {
 export const findAll = async () => {
   const listOrds = await modelOrder.findAll();
   if (!listOrds || listOrds.length === 0) {
-    erroType.message = 'Order not found';
-    throw new CustomError(erroType);
+    return [];
   }
   const result = listOrds.map(async (i) => {
     const productId = await modelOrder.findOderId(i.id);

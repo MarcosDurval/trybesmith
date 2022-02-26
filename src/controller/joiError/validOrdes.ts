@@ -1,5 +1,5 @@
 import CustomError from '../../error/customErro';
-import { ErrorType } from '../../interface/interface';
+import { ErrorType } from '../../interface';
 
 const erroType400:ErrorType = { code: 'BadRequest' };
 const erroType422:ErrorType = { code: 'UnprocessableEntity' };

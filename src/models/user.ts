@@ -1,5 +1,5 @@
 import { ResultSetHeader } from 'mysql2';
-import { IUserWithId, User } from '../interface/interface';
+import { IUserWithId, User } from '../interface';
 import connection from './connection';
 
 export const createUser = async (user:User):Promise<number | null> => {

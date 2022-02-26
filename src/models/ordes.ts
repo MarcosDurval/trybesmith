@@ -1,5 +1,5 @@
 import { OkPacket } from 'mysql2';
-import { IOders, IidProducts } from '../interface/orders';
+import { IOders, IidProducts } from '../interface';
 import connection from './connection';
 
 const createOrder = async (id:number, product:Array<number>) => {

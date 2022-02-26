@@ -1,5 +1,5 @@
 import CustomErro from '../error/customErro';
-import { ErrorType, ILogin, User } from '../interface/interface';
+import { ErrorType, ILogin, User } from '../interface';
 import * as modelUser from '../models/user';
 import { login } from '../utils/jwt';
 

@@ -1,6 +1,6 @@
 import { Response, NextFunction, Request } from 'express';
 import CustomError from '../../error/customErro';
-import { ErrorType, IUserWithId } from '../../interface/interface';
+import { ErrorType, IUserWithId } from '../../interface';
 import { valid } from '../../utils/jwt';
 
 const erroType:ErrorType = { code: 'Unauthorized' };

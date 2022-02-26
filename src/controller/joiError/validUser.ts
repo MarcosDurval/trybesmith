@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import CustomError from '../../error/customErro';
-import { User, ErrorType } from '../../interface/interface';
+import { User, ErrorType } from '../../interface';
 // custom messages Joi: https://stackoverflow.com/questions/48720942/node-js-joi-how-to-display-a-custom-error-messages
 const erroType400:ErrorType = { code: 'BadRequest' };
 const erroType422:ErrorType = { code: 'UnprocessableEntity' };

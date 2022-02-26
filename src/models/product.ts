@@ -1,5 +1,5 @@
 import { ResultSetHeader } from 'mysql2';
-import { IProducts } from '../interface/interface';
+import { IProducts } from '../interface';
 import connection from './connection';
 
 export const create = async (name:string, amount:string) => {

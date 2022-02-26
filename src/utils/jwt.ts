@@ -1,5 +1,5 @@
 import Jwt from 'jsonwebtoken';
-import { User } from '../interface/interface';
+import { User } from '../interface';
 
 const senha = 'minhaSenhaÉ';
 // const options:{ expiresIn:string, algorithm:string } = {
