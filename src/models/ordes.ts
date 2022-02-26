@@ -1,5 +1,5 @@
 import { OkPacket } from 'mysql2';
-import { IOders, IProducts } from '../interface/orders';
+import { IOders, IidProducts } from '../interface/orders';
 import connection from './connection';
 
 const createOrder = async (id:number, product:Array<number>) => {
@@ -21,7 +21,7 @@ export const findOne = async (id:number) => {
   const query = 'SELECT * FROM Trybesmith.Orders WHERE id = ?';
   try {
     const [row] = await connection.execute(query, [id]);
-    const data = row as unknown as IOders[];
+    const data = row as IOders[];
     return data;
   } catch (error) {
     console.error(error);
@@ -32,11 +32,21 @@ export const findOderId = async (id:number) => {
   try {
     const query = 'SELECT id FROM Trybesmith.Products WHERE orderId = ?';
     const [result] = await connection.execute(query, [id]);
-    const t = result as IProducts[];
+    const t = result as IidProducts[];
     return t.map((i) => i.id);
   } catch (error) {
     console.error('error:', error);
   }
 };
 
+export const findAll = async () => {
+  const query = 'SELECT * FROM Trybesmith.Orders';
+  try {
+    const [row] = await connection.execute(query);
+    const data = row as IOders[];
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 export default createOrder;

@@ -18,4 +18,21 @@ export const findId = async (id:number) => {
   const productId = await modelOrder.findOderId(orders[0].id);
   return [orders[0].userId, productId];
 };
+
+export const findAll = async () => {
+  const listOrds = await modelOrder.findAll();
+  if (!listOrds || listOrds.length === 0) {
+    erroType.message = 'Order not found';
+    throw new CustomError(erroType);
+  }
+  const result = listOrds.map(async (i) => {
+    const productId = await modelOrder.findOderId(i.id);
+    return {
+      id: i.id,
+      userId: i.userId,
+      products: productId,
+    };
+  });
+  return Promise.all(result);
+};
 export default createOrder;

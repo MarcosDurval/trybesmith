@@ -1,0 +1,14 @@
+[
+  {
+    "username": "marcos",
+    "classe": "tank",
+    "level": 1,
+    "password": "senhalonga"
+  },
+  {
+    "username": "antonio",
+    "classe": "atirador",
+    "level": 10,
+    "password": "senhalonga"
+  }
+]

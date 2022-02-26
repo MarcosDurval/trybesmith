@@ -13,6 +13,11 @@ declare module 'express-serve-static-core'{
 const orders = Router();
 
 orders.use(auth);
+
 orders.post('/', controllerOrdes.default);
+
+orders.get('/', controllerOrdes.findAll);
+
 orders.get('/:id', controllerOrdes.findeOrder);
+
 export default orders;

@@ -15,5 +15,8 @@ export const findeOrder = async (req:Request, res:Response) => {
 
   return res.status(200).json({ id, userId, products: trat });
 };
-
+export const findAll = async (req:Request, res:Response) => {
+  const result = await serviceOrder.findAll();
+  return res.status(200).json(result);
+};
 export default createOrder;

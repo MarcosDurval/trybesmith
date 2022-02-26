@@ -2,6 +2,6 @@ export interface IOders{
   id:number,
   userId:number
 }
-export interface IProducts{
+export interface IidProducts{
   id:number
 }
