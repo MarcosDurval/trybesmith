@@ -1,5 +1,3 @@
-import { JwtPayload } from 'jsonwebtoken';
-
 export interface User {
   username:string,
   classe:string,
@@ -11,7 +9,7 @@ export interface IUserWithId extends User{
   id:number
 }
 
-export interface IUser extends JwtPayload {
+export interface IUser {
   username:string,
   classe:string,
   level:number,

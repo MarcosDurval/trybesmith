@@ -1,4 +1,3 @@
-// import { IProducts } from '../interface/interface';
 import * as modelProducts from '../models/product';
 
 export const crate = async (name:string, amount:string) => {

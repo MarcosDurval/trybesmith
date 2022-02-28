@@ -16,8 +16,7 @@ export const createUser = async (user:User) => {
 
 export const loginUser = async ({ username, password }:ILogin) => {
   const userDate = await modelUser.findUser(username);
-  if (!userDate) throw new CustomErro(erroType);
-  if (userDate.password !== password) throw new CustomErro(erroType);
+  if (!userDate || userDate.password !== password) throw new CustomErro(erroType);
   const token = login(userDate);
   return token;
 };
