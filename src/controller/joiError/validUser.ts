@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import CustomError from '../../error/customErro';
-import { User, ErrorType } from '../../interface';
+import { IUserWithPassoword, ErrorType } from '../../interface';
+
 // custom messages Joi: https://stackoverflow.com/questions/48720942/node-js-joi-how-to-display-a-custom-error-messages
 const erroType400:ErrorType = { code: 'BadRequest' };
 const erroType422:ErrorType = { code: 'UnprocessableEntity' };
@@ -9,7 +10,7 @@ const validNameAndPassword = Joi.object({
   password: Joi.required().messages({ 'any.required': 'Password is required' }),
 });
 
-export const validNamePassword = ({ username, password }:User):void => {
+export const validNamePassword = ({ username, password }:IUserWithPassoword):void => {
   const val = validNameAndPassword.validate({ username, password });
   if (val.error) {
     erroType400.message = val.error.message;
@@ -37,7 +38,7 @@ const des = (username:string, password:string, classe:string, level:number) => {
   const schema422 = allSchema422.validate({ username, classe, level, password }).error;
   return [n, schema400, schema422];
 }; 
-export const allValidCreate = ({ username, password, classe, level }:User) => {
+export const allValidCreate = ({ username, password, classe, level }:IUserWithPassoword) => {
   const [n, schema400, schema422] = des(username, password, classe, level);
   if (n) {
     erroType400.message = n.message;

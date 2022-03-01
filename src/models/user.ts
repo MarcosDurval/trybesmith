@@ -1,9 +1,8 @@
 import { ResultSetHeader } from 'mysql2';
-import { PrismaClient } from '@prisma/client';
-import { IUserWithId, User } from '../interface';
-import connection from './connection';
+import connection, { prisma } from './connection';
+import { IUserWithId, User, IUserWithPassoword } from '../interface';
 
-export const createUser = async (user:User):Promise<number | null> => {
+export const createUser = async (user:IUserWithPassoword):Promise<number | null> => {
   const { username, classe, level, password } = user;
   try {
     const [newUser] = await connection.execute<ResultSetHeader>(`
@@ -17,7 +16,6 @@ export const createUser = async (user:User):Promise<number | null> => {
 };
 
 export const findUser = async (name: User['username']) => {
-  const prisma = new PrismaClient();
   try {
     const rows = await prisma.users.findMany({ where: {
       username: name,

@@ -2,7 +2,7 @@ import { ErrorType } from './error';
 import { ILogin } from './login';
 import { IOders } from './orders';
 import { IProducts, IidProducts } from './products';
-import { IUser, IUserWithId, User } from './user';
+import { IUser, IUserWithId, User, IUserWithPassoword } from './user';
 
 export {
   ErrorType,
@@ -13,4 +13,5 @@ export {
   IUser,
   IUserWithId,
   User,
+  IUserWithPassoword,
 };

@@ -2,10 +2,13 @@ export interface User {
   username:string,
   classe:string,
   level:number,
+}
+
+export interface IUserWithPassoword extends User{
   password:string
 }
 
-export interface IUserWithId extends User{
+export interface IUserWithId extends IUserWithPassoword{
   id:number
 }
 
