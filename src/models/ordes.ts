@@ -1,15 +1,17 @@
-import { OkPacket } from 'mysql2';
 import { IOders, IidProducts } from '../interface';
-import connection from './connection';
+import prisma from './connection';
 
 const createOrder = async (id:number, product:Array<number>) => {
-  const query = 'INSERT INTO Trybesmith.Orders (userId) VALUES (?)';
-  const updateQuery = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id=?';
+  // const query = 'INSERT INTO Trybesmith.Orders (userId) VALUES (?)';
+  // const updateQuery = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id=?';
   try {
-    const [row] = await connection.execute<OkPacket>(query, [id]);
-    await Promise.all(product.map(async (p) => {
-      connection.execute(updateQuery, [row.insertId, p]);
-    }));
+    // const [row] = await connection.execute<OkPacket>(query, [id]);
+    // await Promise.all(product.map(async (p) => {
+    //   connection.execute(updateQuery, [row.insertId, p]);
+    // }));
+    const orders = await prisma.orders.create({ data: { userId: id } });
+    await prisma.products.updateMany({ where: { id: { in: product } },
+      data: { orderId: orders.id } });
     return [id, product];
   } catch (error) {
     console.error('error:', error);
@@ -18,11 +20,10 @@ const createOrder = async (id:number, product:Array<number>) => {
 };
 
 export const findOne = async (id:number) => {
-  const query1 = 'SELECT * FROM Trybesmith.Orders WHERE id = ?';
   try {
-    const [row] = await connection.execute(query1, [id]);
-    const data = row as IOders[];
-    return data;
+    const row = await prisma.orders.findFirst({ where: { id } });
+   
+    return row as IOders;
   } catch (error) {
     console.error(error);
   }
@@ -30,8 +31,7 @@ export const findOne = async (id:number) => {
 
 export const findOderId = async (id:number) => {
   try {
-    const query = 'SELECT id FROM Trybesmith.Products WHERE orderId = ?';
-    const [result] = await connection.execute(query, [id]);
+    const result = await prisma.products.findMany({ where: { orderId: id } });
     const t = result as IidProducts[];
     return t.map((i) => i.id);
   } catch (error) {
@@ -40,11 +40,10 @@ export const findOderId = async (id:number) => {
 };
 
 export const findAll = async () => {
-  const query = 'SELECT * FROM Trybesmith.Orders';
   try {
-    const [row] = await connection.execute(query);
-    const data = row as IOders[];
-    return data;
+    const row = await prisma.orders.findMany();
+     
+    return row as IOders[];
   } catch (error) {
     console.error(error);
   }

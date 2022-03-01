@@ -1,5 +1,5 @@
 import Jwt from 'jsonwebtoken';
-import { IUserWithId, User } from '../interface';
+import { IUser, User } from '../interface';
 
 const senha = 'minhaSenhaÉ';
 // const options:{ expiresIn:string, algorithm:string } = {
@@ -14,6 +14,6 @@ export const login = (payload:User):string => {
 };
 // source: https://stackoverflow.com/questions/68403905/how-to-add-additional-properties-to-jwtpayload-type-from-types-jsonwebtoken
 export const valid = (token:string) => {
-  const result = Jwt.verify(token, senha) as IUserWithId; 
-  return result;
+  const result = Jwt.verify(token, senha); 
+  return result as IUser;
 };

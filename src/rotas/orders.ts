@@ -2,12 +2,12 @@ import { Router } from 'express';
 import 'express-async-errors';
 import * as controllerOrdes from '../controller/orders';
 import auth from '../controller/middleware/auth';
-import { IUserWithId } from '../interface';
+import { IUser } from '../interface';
 
 // source: https://serveanswer.com/questions/how-do-i-add-custom-property-to-express-request-in-typescript
 declare module 'express-serve-static-core'{
   interface Request {
-    user:IUserWithId
+    user:IUser
   }
 }
 const orders = Router();

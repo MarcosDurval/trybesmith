@@ -1,15 +1,13 @@
-import { ResultSetHeader } from 'mysql2';
-import connection, { prisma } from './connection';
+// import { ResultSetHeader } from 'mysql2';
+import prisma from './connection';
 import { IUserWithId, User, IUserWithPassoword } from '../interface';
 
 export const createUser = async (user:IUserWithPassoword):Promise<number | null> => {
   const { username, classe, level, password } = user;
   try {
-    const [newUser] = await connection.execute<ResultSetHeader>(`
-  INSERT INTO Trybesmith.Users (username,classe,level,password) VALUES (?,?,?,?)
-  `, [username, classe, level, password]);
-    
-    return newUser.insertId;
+    const newUser = await prisma.users.create({ data: { username, classe, level, password } });
+
+    return newUser.id;
   } catch (error) {
     return null;
   }
@@ -17,12 +15,11 @@ export const createUser = async (user:IUserWithPassoword):Promise<number | null>
 
 export const findUser = async (name: User['username']) => {
   try {
-    const rows = await prisma.users.findMany({ where: {
+    const [user] = await prisma.users.findMany({ where: {
       username: name,
     } });
-    const [user] = rows as IUserWithId[];
-    console.log(rows);
-    return user;
+   
+    return user as IUserWithId;
   } catch (error) {
     console.error(error);  
   }

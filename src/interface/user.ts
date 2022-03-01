@@ -13,10 +13,10 @@ export interface IUserWithId extends IUserWithPassoword{
 }
 
 export interface IUser {
+  id:number
   username:string,
   classe:string,
   level:number,
-  password:string
   iat:number,
   exp:number
 }

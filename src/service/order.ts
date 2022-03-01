@@ -10,12 +10,12 @@ const createOrder = async (id:number, product:Array<number>) => {
 };
 export const findId = async (id:number) => {
   const orders = await modelOrder.findOne(id);
-  if (!orders || orders.length === 0) {
+  if (!orders) {
     throw new CustomError(erroType);
   }
 
-  const productId = await modelOrder.findOderId(orders[0].id);
-  return [orders[0].userId, productId];
+  const productId = await modelOrder.findOderId(orders.id);
+  return [orders.userId, productId];
 };
 
 export const findAll = async () => {
