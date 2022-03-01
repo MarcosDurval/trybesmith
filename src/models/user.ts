@@ -1,5 +1,5 @@
 // import { ResultSetHeader } from 'mysql2';
-import prisma from './connection';
+import { prisma } from './connection';
 import { IUserWithId, User, IUserWithPassoword } from '../interface';
 
 export const createUser = async (user:IUserWithPassoword):Promise<number | null> => {

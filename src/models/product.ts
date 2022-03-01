@@ -1,6 +1,6 @@
 // import { ResultSetHeader } from 'mysql2';
 import { IProducts } from '../interface';
-import prisma from './connection';
+import { prisma } from './connection';
 
 export const create = async (name:string, amount:string) => {
   try {
