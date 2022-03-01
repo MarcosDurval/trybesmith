@@ -3,16 +3,8 @@ import { IProducts } from '../interface';
 import { prisma } from './connection';
 
 export const create = async (name:string, amount:string) => {
-  try {
-  //   const [product] = await connection.execute<ResultSetHeader>(`
-  // INSERT INTO Trybesmith.Products (name,amount) VALUES (?,?)
-  // `, [name, amount]);
-  //   const { insertId: id } = product;
-    const product = await prisma.products.create({ data: { name, amount } });
-    return product;  
-  } catch (error) {
-    console.error(error);
-  }
+  const product = await prisma.products.create({ data: { name, amount } });
+  return product;
 };
 
 export const findProduct = async ():Promise<IProducts[]> => {

@@ -6,12 +6,12 @@ enum Listerro {
   UnprocessableEntity = 422,
   Unauthorized = 401,
 }
-const erros:ErrorRequestHandler = (err, _req, res, next) => {
+const erros:ErrorRequestHandler = (err, _req, res, _next) => {
   const type = Listerro[err.code];
   if (type) {
     const status = +type;
     return res.status(status).json({ error: err.message });
   }
-  return next(err);
+  return res.status(500).json({ error: 'inesperado' });
 };
 export default erros;
