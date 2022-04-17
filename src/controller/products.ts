@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import valid from './joiError/validProduct';
+import valid from './joischema/validProduct';
 import * as serviceProduct from '../service/products';
 
 export const crate = async (req:Request, res:Response) => {
@@ -9,7 +9,7 @@ export const crate = async (req:Request, res:Response) => {
   return res.status(201).json({ item: result });
 };
 
-export const findAll = async (req:Request, res:Response) => {
+export const findAll = async (_req:Request, res:Response) => {
   const result = await serviceProduct.findAll();
   return res.status(200).json(result);
 };

@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import validArray from './joiError/validOrdes';
+import validArray from './joischema/validOrdes';
 import * as serviceOrder from '../service/order';
 
 const createOrder = async (req:Request, res:Response) => {
@@ -15,7 +15,7 @@ export const findeOrder = async (req:Request, res:Response) => {
 
   return res.status(200).json({ id, userId, products: trat });
 };
-export const findAll = async (req:Request, res:Response) => {
+export const findAll = async (_req:Request, res:Response) => {
   const result = await serviceOrder.findAll();
   return res.status(200).json(result);
 };

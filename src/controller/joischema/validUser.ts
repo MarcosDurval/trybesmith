@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import CustomError from '../../error/customErro';
+import CustomError from '../../error/customError';
 import { IUserWithPassoword, ErrorType } from '../../interface';
 
 // custom messages Joi: https://stackoverflow.com/questions/48720942/node-js-joi-how-to-display-a-custom-error-messages

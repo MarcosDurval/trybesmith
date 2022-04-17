@@ -1,4 +1,4 @@
-import CustomError from '../../error/customErro';
+import CustomError from '../../error/customError';
 import { ErrorType } from '../../interface';
 
 const erroType400:ErrorType = { code: 'BadRequest' };
@@ -26,9 +26,9 @@ const array422 = (products:Array<number>) => {
     }
   });
 };
-const validArray = (products:Array<number>) => {
+const validOrdes = (products:Array<number>) => {
   array400(products);
   array422(products);
 };
 
-export default validArray;
+export default validOrdes;

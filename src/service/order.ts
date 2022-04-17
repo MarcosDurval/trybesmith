@@ -1,4 +1,4 @@
-import CustomError from '../error/customErro';
+import CustomError from '../error/customError';
 import { ErrorType } from '../interface';
 import * as modelOrder from '../models/ordes';
 

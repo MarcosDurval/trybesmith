@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import CustomError from '../../error/customErro';
+import CustomError from '../../error/customError';
 import { ErrorType } from '../../interface';
 
 const erroType400:ErrorType = { code: 'BadRequest' };

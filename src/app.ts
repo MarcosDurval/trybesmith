@@ -1,6 +1,6 @@
 import express from 'express';
 import rota from './rotas/index';
-import terros from './controller/middleware/error';
+import erros from './controller/middleware/error';
 
 const app = express();
 
@@ -9,6 +9,6 @@ app.use('/users', rota.user);
 app.use('/login', rota.Login);
 app.use('/products', rota.products);
 app.use('/orders', rota.orders);
-app.use(terros);
+app.use(erros);
 
 export default app;

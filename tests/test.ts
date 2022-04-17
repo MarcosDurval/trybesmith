@@ -437,7 +437,7 @@ describe("5 - Crie um endpoint para o cadastro de um pedido", () => {
   });
 
   it('Será validado que não é possível cadastrar pedidos sem token', async () => {
-    ;
+    
     const result = await request(app).post("/orders").send({
       products: [1, 2],
     });
