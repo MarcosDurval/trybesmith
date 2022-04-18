@@ -2,9 +2,6 @@ import { IOders, IidProducts } from '../interface';
 import { prisma } from './connection';
 
 const createOrder = async (id:number, product:Array<number>) => {
-  // const query = 'INSERT INTO Trybesmith.Orders (userId) VALUES (?)';
-  // const updateQuery = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id=?';
- 
   const orders = await prisma.orders.create({ data: { userId: id } });
   await prisma.products.updateMany({ where: { id: { in: product } },
     data: { orderId: orders.id } });
