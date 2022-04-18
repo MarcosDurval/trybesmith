@@ -11,7 +11,7 @@ const removePassword = ({ username, level, classe }:User) => ({ username, level,
 const passwordHash = (user:IUserWithPassoword, hash:string) => ({ ...user, password: hash });
 const verify = (hash:string, password:string) => argon2.verify(hash, password);
 
-export const createUser = async (user:IUserWithPassoword) => {
+export const createUser = async (user:IUserWithPassoword):Promise<string> => {
   const hash = await argon2.hash(user.password, { type: argon2.argon2id });
   const expectHash = passwordHash(user, hash);
   await modelUser.createUser(expectHash);
@@ -19,7 +19,7 @@ export const createUser = async (user:IUserWithPassoword) => {
   return login(withoutPassword);
 };
 
-export const loginUser = async ({ username, password }:ILogin) => {
+export const loginUser = async ({ username, password }:ILogin):Promise<string> => {
   const userDate = await modelUser.findUser(username);
   if (!userDate || !(await verify(userDate.password, password))) throw new CustomErro(erroType);
   return login(userDate);
