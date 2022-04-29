@@ -4,8 +4,9 @@ import * as modelOrder from '../models/ordes';
 
 const erroType:ErrorType = { code: 'NotFound', message: 'Order not found' };
 
-const createOrder = async (id:number, product:Array<number>):Promise<(number | number[])[]> => {
-  const [n, p] = await modelOrder.default(id, product);
+export const createOrder = async (id:number, product:Array<number>)
+  :Promise<(number | number[])[]> => {
+  const [n, p] = await modelOrder.createOrder(id, product);
   return [n, p];
 };
 export const findId = async (id:number):Promise<(number | number[])[]> => {
@@ -33,4 +34,3 @@ export const findAll = async ():Promise<IResultOders[]> => {
   });
   return Promise.all(result);
 };
-export default createOrder;
