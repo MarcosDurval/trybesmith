@@ -1,5 +1,5 @@
 import express from 'express';
-import rota from './rotas/index';
+import rota from './routes/index';
 import erros from './controller/middleware/error';
 
 const app = express();
