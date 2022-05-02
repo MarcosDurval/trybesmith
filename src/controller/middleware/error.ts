@@ -5,6 +5,7 @@ enum Listerro {
   NotFound = 404,
   UnprocessableEntity = 422,
   Unauthorized = 401,
+  Conflict = 409,
 }
 const error:ErrorRequestHandler = (err, _req, res, _next) => {
   const type = Listerro[err.code];
