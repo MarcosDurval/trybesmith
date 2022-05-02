@@ -1,13 +1,20 @@
 import CustomError from '../error/customError';
 import { ErrorType, IResultOders } from '../interface';
 import * as modelOrder from '../models/ordes';
+import * as serviceProducts from './products';
 
 const erroType:ErrorType = { code: 'NotFound', message: 'Order not found' };
+const erroExistOrder:ErrorType = { code: 'Conflict', message: 'Do not have the product in stock' };
 
 export const createOrder = async (id:number, product:Array<number>)
   :Promise<(number | number[])[]> => {
-  const [n, p] = await modelOrder.createOrder(id, product);
-  return [n, p];
+  const sale = await Promise.all(product.map((v) => serviceProducts.findId(v)));
+  const verifySale = sale.every((v) => v?.orderId === null);
+  if (!verifySale) {
+    throw new CustomError(erroExistOrder);
+  }
+  const [userId, products] = await modelOrder.createOrder(id, product);
+  return [userId, products];
 };
 export const findId = async (id:number):Promise<(number | number[])[]> => {
   const orders = await modelOrder.findOne(id);
