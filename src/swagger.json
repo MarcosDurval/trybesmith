@@ -25,10 +25,10 @@
               "schema": {
                 "$ref": "#/components/schemas/Users"
               },
-              "examples":{
-                "user":{
-                  "value":{
-                    "username":"Batman",
+              "examples": {
+                "user": {
+                  "value": {
+                    "username": "Batman",
                     "classe": "tank",
                     "level": 30,
                     "password": "senhasecreta"
@@ -38,28 +38,28 @@
             }
           }
         },
-        "responses":{
-          "201":{
-            "description":"Contém um token JWT",
-            "content":{
-              "application/json":{
-                "schema":{
+        "responses": {
+          "201": {
+            "description": "Contém um token JWT",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Token"
                 }
               }
-            } 
+            }
           }
         }
       }
     },
-    "/login":{
-      "post":{
-        "sumary":"Login de usuario",
-        "description":"Essa rota será responsavel por fazer login",
+    "/login": {
+      "post": {
+        "sumary": "Login de usuario",
+        "description": "Essa rota será responsavel por fazer login",
         "tags": [
           "Users"
         ],
-        "requestBody":{
+        "requestBody": {
           "content": {
             "application/json": {
               "schema": {
@@ -68,45 +68,45 @@
             }
           }
         },
-        "responses":{
-          "200":{
-            "description":"Contém um token JWT",
-            "content":{
-              "application/json":{
-                "schema":{
+        "responses": {
+          "200": {
+            "description": "Contém um token JWT",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Token"
                 }
               }
             }
           },
-          "401":{
-            "description":"Contém uma mensagem com o erro",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "$ref":"#/components/schemas/Error"
+          "401": {
+            "description": "Contém uma mensagem com o erro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 },
-                "examples":{
-                  "Unauthorized":{
-                    "value":{
-                      "error":"Username or password invalid"
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "error": "Username or password invalid"
                     }
                   }
                 }
               }
             }
           },
-          "400":{
-            "description":"Contém uma mensagem com o erro",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "$ref":"#/components/schemas/Error"
+          "400": {
+            "description": "Contém uma mensagem com o erro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 },
-                "examples":{
-                  "BadRequest":{
-                    "value":{
-                      "error":"Username is required"
+                "examples": {
+                  "BadRequest": {
+                    "value": {
+                      "error": "Username is required"
                     }
                   }
                 }
@@ -115,7 +115,66 @@
           }
         }
       }
-     
+    },
+    "/products": {
+      "post": {
+        "sumary": "Listagem de produtos",
+        "description": "Essa rota será responsavel cadastrar um novo produto",
+        "tags": [
+          "Products"
+        ],
+        "requestBody":{
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/newProduct"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses":{
+          "201":{
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          } 
+        }     
+      },
+      "get": {
+        "sumary": "Listagem de produtos",
+        "description": "Essa rota será responsavel por listar todos os produtos",
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Products"
+              }
+            }
+          },
+          "401": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -137,34 +196,93 @@
           }
         }
       },
-      "Login":{
-        "type":"object",
-        "properties":{
+      "Login": {
+        "type": "object",
+        "properties": {
           "username": {
             "type": "string",
-            "example":"Batman"
+            "example": "Batman"
           },
-          "password":{
-            "type":"string",
-            "example":"senhasecreta"
+          "password": {
+            "type": "string",
+            "example": "senhasecreta"
           }
         }
       },
-      "Token":{
+      "Token": {
         "type": "object",
-        "properties":{
-          "token":{
-            "type":"string"
+        "properties": {
+          "token": {
+            "type": "string"
           }
         }
       },
-      "Error":{
-        "type":"object",
-        "properties":{
-          "error":{
-            "type":"string"
+      "Products": {
+        "type": "array",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "orderId": {
+            "type": "number"
           }
         }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "item":{
+            "type":"object",
+            "properties":{
+              "id": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "string"
+              },
+              "orderId": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "newProduct":{
+        "type":"object",
+        "properties": {
+          "name":{
+            "type":"string",
+            "example":"espada longa"
+          },
+          "amount":{
+            "type":"string",
+            "example":"8k de prata"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
       }
     }
   }
