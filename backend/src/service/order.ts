@@ -4,7 +4,7 @@ import * as modelOrder from '../models/ordes';
 import * as serviceProducts from './products';
 
 const erroType:ErrorType = { code: 'NotFound', message: 'Order not found' };
-const erroExistOrder:ErrorType = { code: 'Conflict', message: 'Do not have the product in stock' };
+const erroExistOrder:ErrorType = { code: 'NotFound', message: 'Do not have the product in stock' };
 
 export const createOrder = async (id:number, product:Array<number>)
   :Promise<(number | number[])[]> => {

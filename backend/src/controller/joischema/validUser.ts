@@ -33,15 +33,15 @@ const allSchema400 = Joi.object({
   level: Joi.required().messages({ 'any.required': 'Level is required' }),
 });
 const des = (username:string, password:string, classe:string, level:number) => {
-  const n = validNameAndPassword.validate({ username, password }).error;
+  const nameAndPassword = validNameAndPassword.validate({ username, password }).error;
   const schema400 = allSchema400.validate({ classe, level }).error;
   const schema422 = allSchema422.validate({ username, classe, level, password }).error;
-  return [n, schema400, schema422];
+  return [nameAndPassword, schema400, schema422];
 }; 
 export const allValidCreate = ({ username, password, classe, level }:IUserWithPassoword) => {
-  const [n, schema400, schema422] = des(username, password, classe, level);
-  if (n) {
-    erroType400.message = n.message;
+  const [nameAndPassword, schema400, schema422] = des(username, password, classe, level);
+  if (nameAndPassword) {
+    erroType400.message = nameAndPassword.message;
     throw new CustomError(erroType400); 
   }
   if (schema400) {
