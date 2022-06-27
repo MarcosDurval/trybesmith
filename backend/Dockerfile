@@ -1,12 +1,12 @@
 FROM node:16
-# Create app directory
+
 WORKDIR /usr/backend
 
 COPY package*.json ./
 
 RUN npm install
 
-COPY . . 
+COPY --chown=node:node . /usr/backend/ 
 
 EXPOSE 3001
 
