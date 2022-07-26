@@ -6,15 +6,15 @@ import * as serviceProducts from './products';
 const erroType:ErrorType = { code: 'NotFound', message: 'Order not found' };
 const erroExistOrder:ErrorType = { code: 'NotFound', message: 'Do not have the product in stock' };
 
-export const createOrder = async (id:number, product:Array<number>)
+export const createOrder = async (id:number, products:Array<number>)
   :Promise<(number | number[])[]> => {
-  const sale = await Promise.all(product.map((v) => serviceProducts.findId(v)));
-  const verifySale = sale.every((v) => v?.orderId === null);
-  if (!verifySale) {
+  const sales = await Promise.all(products.map((product) => serviceProducts.findId(product)));
+  const verifySales = sales.every((sale) => sale?.orderId === null);
+  if (!verifySales) {
     throw new CustomError(erroExistOrder);
   }
-  const [userId, products] = await modelOrder.createOrder(id, product);
-  return [userId, products];
+  const [userId, resultProducts] = await modelOrder.createOrder(id, products);
+  return [userId, resultProducts];
 };
 export const findId = async (id:number):Promise<(number | number[])[]> => {
   const orders = await modelOrder.findOne(id);
@@ -31,11 +31,11 @@ export const findAll = async ():Promise<IResultOders[]> => {
   if (!listOrds || listOrds.length === 0) {
     return [];
   }
-  const result = listOrds.map(async (i) => {
-    const productId = await modelOrder.findOderId(i.id);
+  const result = listOrds.map(async (order) => {
+    const productId = await modelOrder.findOderId(order.id);
     return {
-      id: i.id,
-      userId: i.userId,
+      id: order.id,
+      userId: order.userId,
       products: productId,
     };
   });
