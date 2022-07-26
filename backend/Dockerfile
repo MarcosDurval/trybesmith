@@ -14,4 +14,4 @@ RUN npx prisma generate
 
 USER node
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "start" ]
