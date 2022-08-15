@@ -5,9 +5,9 @@ A aplicação é um CRUD de itens medievais
 Typescript, prisma, express, Joi e Swagger para documentar as rotas
 
 ### Instruções para rodar
-crie um arquivo .env e siga o exemplo do .env.example.
+crie um arquivo .env dentro do diretório backend e siga o exemplo do .env.example.
 
-no mesmo diretorio do docker-compose
+no mesmo diretório do docker-compose
 execute:
 ```
 docker-compose up --build -d
